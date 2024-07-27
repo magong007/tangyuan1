@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 tacoma
+=======
+<<<<<<< HEAD
+toyota
+=======
+hello world cup
+>>>>>>> 723b5a3f51389e81fcc0a4bfebd6e311832ee2a9
+toyota tacoman
+>>>>>>> 18ff9a25cae325d8741e508864f3d8b9b803b353
