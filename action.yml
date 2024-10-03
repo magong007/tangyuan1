@@ -1,1 +1,20 @@
+name: "myaction"
+description: "my action"
 
+inputs:
+  repository:
+    description: "repo nmae"
+    default: ${{ github.repository }}
+  token:
+    description: "repo nmae"
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - sehll: bash
+      run: |
+        export PYTHONPATH=${{ github.action_path }}:${{ github.action_path }}/vendor
+        python3 -m myaction \
+          --github-repository="${{ inputs.repository }}" \
+          --github-token="${{ inputs.token }}" 
