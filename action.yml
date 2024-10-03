@@ -1,14 +1,15 @@
-name: "myaction"
-description: "my action"
-
+name: 'Blog Custom Github Action'
+description: 'Call an API and get the result'
 inputs:
-
+  pokemon_id:
+    description: 'number of the pokemon in the pokedex'
+    required: true
+    default: 1
+outputs:
+  pokemon_name:
+    description: 'Name des Pokemons'
 runs:
-  using: composite
-  steps:
-    - sehll: bash
-      run: |
-        export PYTHONPATH=${{ github.action_path }}:${{ github.action_path }}/vendor
-        python3 -m myaction \
-          --github-repository="${{ inputs.repository }}" \
-          --github-token="${{ inputs.token }}" 
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.pokemon_id}}
