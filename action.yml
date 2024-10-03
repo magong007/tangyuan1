@@ -2,12 +2,6 @@ name: "myaction"
 description: "my action"
 
 inputs:
-  repository:
-    description: "repo nmae"
-    default: ${{ github.repository }}
-  token:
-    description: "repo nmae"
-    default: ${{ github.token }}
 
 runs:
   using: composite
