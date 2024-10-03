@@ -1,4 +1,4 @@
-name "myaction"
+name: "myaction"
 description: "my action"
 
 inputs:
