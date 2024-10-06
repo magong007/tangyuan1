@@ -27,11 +27,20 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        #run: echo Hello, world!
-        uses: ./
+        run: echo Hello, world!
+        
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Get Pokemon name
+        uses: ./ # Uses an action in the root directory
+        id: pokemon
+        with:
+          pokemon_id: 150
+
+      - name: Get the pokemon
+        run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
