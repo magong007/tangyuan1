@@ -6,5 +6,6 @@ api_url="https://pokeapi.co/api/v2/pokemon/${INPUT_POKEMON_ID}"
  
 pokemon_name=$(curl "${api_url}" | jq ".name")
 echo $pokemon_name
+echo "debug:running inside docker contiainter"
  
 echo "::set-output name=pokemon_name::$pokemon_name"
