@@ -51,10 +51,12 @@ jobs:
       - name: Get Change Status from ServiceNow
         run: |
           CHANGE_SYS_ID="CHG0000076"  # Replace with actual sys_id or fetch dynamically
-          RESPONSE=$(curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
-           # "https://${{ secrets.SN_INSTANCE_URL }}/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state" \
-                        "https://dev323747.service-now.com/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state" \
-            -H "Accept: application/json")
+          RESPONSE=$(curl -s -u "${{ env.SN_USERNAME }}:${{ env.SN_PASSWORD }}"  \
+          "https://dev323747.service-now.com/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state"   \
+          -H "Accept: application/json")
+           # "https://${{ secrets.SN_INSTANCE_URL }}/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state"  "https://dev323747.service-now.com/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state"   -H "Accept: application/json")
+                    #    "https://dev323747.service-now.com/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state" \
+             # -H "Accept: application/json")
           echo "response:$RESPONSE"  
           CHANGE_NUMBER=$(echo "$RESPONSE" | jq -r '.result.number')
           CHANGE_STATE=$(echo "$RESPONSE" | jq -r '.result.state')
