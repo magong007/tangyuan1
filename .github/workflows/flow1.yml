@@ -50,7 +50,7 @@ jobs:
 
       - name: Get Change Status from ServiceNow
         run: |
-          CHANGE_SYS_ID="CHG0000076"  # Replace with actual sys_id or fetch dynamically
+          CHANGE_SYS_ID="CHG00000769999"  # Replace with actual sys_id or fetch dynamically
           RESPONSE=$(curl -s -u "${{ env.SN_USERNAME }}:${{ env.SN_PASSWORD }}"  \
           "https://dev323747.service-now.com/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state"   \
           -H "Accept: application/json")
