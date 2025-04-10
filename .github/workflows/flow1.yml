@@ -50,10 +50,17 @@ jobs:
 
       - name: Get Change Status from ServiceNow
         run: |
-          #CHANGE_SYS_ID="CHG00000769999"  # Replace with actual sys_id or fetch dynamically  e2cdf552db252200a6a2b31be0b8f57f b0dbda5347c12200e0ef563dbb9a718f
+          #CHANGE_SYS_ID="CHG0000076"  # Replace with actual sys_id or fetch dynamically  e2cdf552db252200a6a2b31be0b8f57f b0dbda5347c12200e0ef563dbb9a718f
           #CHANGE_SYS_ID="e2cdf552db252200a6a2b31be0b8f57f"
           CHANGE_SYS_ID="46cc713aa9fe1981008a95d213681c65"   # implement -1
           #CHANGE_SYS_ID="1766f1de47410200e90d87e8dee490f6"   # closed  3
+
+          #
+          r1=$( curl -u "${{ env.SN_USERNAME }}:${{ env.SN_PASSWORD }}" \
+           "https://${{env.SN_INSTANCE_URL}}/api/now/table/change_request?sysparm_query=number=CHG0000076" \
+          -H "Accept: application/json"  )
+          echo "r1:$r1"
+
 
           RESPONSE=$(curl -s -u "${{ env.SN_USERNAME }}:${{ env.SN_PASSWORD }}"  \
           "https://dev323747.service-now.com/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state"   \
