@@ -57,7 +57,7 @@ jobs:
 
           #
           r1=$( curl -u "${{ env.SN_USERNAME }}:${{ env.SN_PASSWORD }}" \
-           "https://${{env.SN_INSTANCE_URL}}/api/now/table/change_request?sysparm_query=number=CHG0000076" \
+           "${{env.SN_INSTANCE_URL}}/api/now/table/change_request?sysparm_query=number=CHG0000076" \
           -H "Accept: application/json"  )
           echo "r1:$r1"
 
