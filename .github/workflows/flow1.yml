@@ -60,6 +60,8 @@ jobs:
            "${{env.SN_INSTANCE_URL}}/api/now/table/change_request?sysparm_query=number=CHG0000076" \
           -H "Accept: application/json"  )
           echo "r1:$r1"
+          SYS_ID=$(echo "$r1" | jq -r '.result[0].sys_id // ""')
+          echo "SYS_ID:$SYS_ID"
 
 
           RESPONSE=$(curl -s -u "${{ env.SN_USERNAME }}:${{ env.SN_PASSWORD }}"  \
