@@ -36,11 +36,29 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Get Pokemon name
-        uses: ./ # Uses an action in the root directory
-        id: pokemon
-        with:
-          pokemon_id: 150
+      # - name: Get Pokemon name
+      #   uses: ./ # Uses an action in the root directory
+      #   id: pokemon
+      #   with:
+      #     pokemon_id: 150
 
-      - name: Get the pokemon
-        run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
+      # - name: Get the pokemon
+      #   run: echo "${{ steps.pokemon.outputs.pokemon_name }} attack"
+
+
+
+
+      - name: Get Change Status from ServiceNow
+        run: |
+          CHANGE_SYS_ID="CHG0000076"  # Replace with actual sys_id or fetch dynamically
+          RESPONSE=$(curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE_URL }}/api/now/table/change_request/${CHANGE_SYS_ID}?sysparm_fields=number,state" \
+            -H "Accept: application/json")
+          CHANGE_NUMBER=$(echo "$RESPONSE" | jq -r '.result.number')
+          CHANGE_STATE=$(echo "$RESPONSE" | jq -r '.result.state')
+          echo "Change Number: $CHANGE_NUMBER, Status: $CHANGE_STATE"
+        env:
+          SN_USERNAME: ${{ secrets.SN_USERNAME }}
+          SN_PASSWORD: ${{ secrets.SN_PASSWORD }}
+          SN_INSTANCE_URL: ${{ secrets.SN_INSTANCE_URL }}
+
